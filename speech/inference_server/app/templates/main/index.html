@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Speech Recognition in Python</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}" />
 </head>
 <body>
 <div id="speechContainer">
@@ -23,7 +22,7 @@
 			body: data
 		}).then(response => response.json()
 		).then(success => alert(success)
-		).catch(error => alert(error);
+		).catch(error => alert(error))
 	    player.src = url;
 	  });
 	</script>
