@@ -17,7 +17,6 @@ def save_to_specto(audiofile):
 
     # convert to flac file
     audiofile = _convert_format(audiofile)
-
     # Loading the image with no sample rate to use the original sample rate and
     # kaiser_fast to make the speed faster according to a blog post about it (on references)
     X, sample_rate = librosa.load(audiofile, sr=None, res_type='kaiser_fast')

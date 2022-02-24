@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    image: nginx:latest
+    ports: 
+      - "80:80"
+    volumes:
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+  app:
+    build: 
+      context: ./speech
+      dockerfile: Dockerfile.app
+    ports:
+      - "5000:5000"
+    volumes:
+      - $PWD:/home/fastai-user/smellslikesingularity
+      - $HOME/.bashrc:/home/fastai-user/.bashrc
+      - $HOME/.vimrc:/home/fastai-user/.vimrc
+    command: bash -c "
+      tail -F docker-compose.yml
+      "
