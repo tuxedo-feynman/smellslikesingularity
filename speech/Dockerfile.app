@@ -4,39 +4,43 @@ RUN useradd fastai-user
 
 RUN apt-get update 
 
-RUN apt-get -y install nano\
-   graphviz \
+RUN apt-get -y install graphviz \
    libwebp-dev \
-   curl
+   curl \
+   htop \
+   ffmpeg
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get -y install nodejs
 RUN node -v
 
-# VIM #######################################################
-# # install dependencies
+## VIM #######################################################
+## # install dependencies
 RUN apt-get -y install libncurses5-dev libncursesw5-dev
 RUN apt -y install git
 RUN apt -y install make
 RUN apt -y install build-essential
 
-# # get source code / checkout version
+## # get source code / checkout version
 RUN git clone https://github.com/vim/vim.git
 RUN cd vim && git checkout tags/v8.2.4460
 
-# # build vim
+## # build vim
 RUN pip install pynvim
 RUN cd vim/src && make install
-#############################################################
+##############################################################
 
-RUN pip uninstall -y pillow
+# Speech Project Dependencies ###########
+RUN apt-get -y install libsndfile1
+########################################
 
-RUN pip install pillow 
-    
-RUN pip install kaggle \
-    dtreeviz \
-    treeinterpreter
-
-RUN pip install waterfallcharts
+#RUN pip uninstall -y pillow
+#RUN pip install pillow 
+#    
+#RUN pip install kaggle \
+#    dtreeviz \
+#    treeinterpreter
+#
+#RUN pip install waterfallcharts
 
 WORKDIR /home/
 

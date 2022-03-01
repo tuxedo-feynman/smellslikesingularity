@@ -23,7 +23,7 @@ def cli():
 )
 def runserver(env, port):
     app = create_app(env)
-    app.run(port=port)
+    app.run(host='0.0.0.0', port=port)
 
 # Add other commands here
 # Eg.

@@ -1,6 +1,7 @@
 import json
+import os
 
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, jsonify
 
 import app.audio.utils as audio
 from app.inference.gender import GenderClassifier
@@ -25,6 +26,4 @@ def infer_gender():
     # first convert audio to a image of the audio spectograph
     specto_path = save_to_specto(convert_format(request.data))
     prediction = gender_classifier.predict(specto_path)
-    return {
-        'gender': prediction
-    }
+    return jsonify({'gender': prediction})

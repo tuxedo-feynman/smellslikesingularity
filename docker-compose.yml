@@ -5,7 +5,7 @@ services:
     ports: 
       - "80:80"
     volumes:
-      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/sites-enabled/speech_inference.conf:/etc/nginx/conf.d/inference.conf
   app:
     build: 
       context: ./speech
@@ -16,6 +16,5 @@ services:
       - $PWD:/home/fastai-user/smellslikesingularity
       - $HOME/.bashrc:/home/fastai-user/.bashrc
       - $HOME/.vimrc:/home/fastai-user/.vimrc
-    command: bash -c "
-      tail -F docker-compose.yml
-      "
+    command: bash -c "cd /home/fastai-user/smellslikesingularity/speech/inference_server && pip install -r requirements.txt 
+      && cd /home/fastai-user/smellslikesingularity/speech/inference_server && export GENDER_MODEL_PATH=../../large_files/gender_cnn_2022_01_17.pkl && python manage.py runserver"
